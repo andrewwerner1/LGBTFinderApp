@@ -4,21 +4,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-center">LGBT Finder</h2>
+<h2 class="text-center">LGBT Friendly Business Finder</h2>
 
 <div class="row">
     <div class="col-sm-5 well">
         <div class="lead text-center">
             <a href="#" id="FinderSection" onclick="LoadFinderSection();">Search For a LGBT Friendly Business</a>
-            <div id="PartialViewFinder"></div>
         </div>
     </div>
     <div class="col-sm-2"></div>
     <div class="col-sm-5 well">
         <div class="lead text-center">
             <a href="#" id="RegisterSection" onclick="LoadRegisterSection();">Register a LGBT Friendly Business</a>
-            <div id="PartialViewRegister"></div>
+
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div id="PartialViewData"></div>
+</div>
+
+<script type="text/javascript">
+    
+    function LoadFinderSection() {
+        $.ajax({
+            type: "GET",
+            url: '/Finder/Index',
+            success: function(data, textStatus, jqXHR) {
+                $('#PartialViewData').html(data);
+            },
+            error: function() {
+                alert("error occurred");
+            }
+        });
+    };
+
+    function LoadRegisterSection() {
+        $.ajax({
+            type: "GET",
+            url: '/Register/Index',
+            success: function(data, textStatus, jqXHR) {
+                $('#PartialViewData').html(data);
+            },
+            error: function() {
+                alert("error occured");
+            }
+        });
+    };
+
+</script>
 
