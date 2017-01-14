@@ -1,85 +1,179 @@
-﻿@model LGBTFinder.Models.BusinessModel
+﻿@using System.Web.UI.WebControls
+@using LGBTFinder.Models
+@model LGBTFinder.Models.BusinessModel
+
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Register Your Business!</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.BusinessName, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BusinessName, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.BusinessName, "", new {@class = "text-danger"})
-            </div>
-        </div>
+    <form>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BusinessType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.BusinessType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BusinessType, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <div class="">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneNumber, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new {@class = "text-danger"})
+            <div class="text-center">
+                <h3><strong>Register Your Business!</strong></h3>
             </div>
-        </div>
+            <br/>
+            <div id="Choice1Section" class="row well well-sm">
+                <div class="col-sm-2 col-xs-1"></div>
+                <div class="col-sm-8 col-xs-10">
+                    <div class="form-group">
+                        <div class="lead">
+                            Step 1...Single Location or Multiple Locations?
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="LocationOptions" class="LocationOptions" id="RadioSingleLocation" value="SingleLocation" onclick="LocationOptionChoice();" />Single Location
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="LocationOptions" class="LocationOptions" id="RadioMultipleLocation" value="MultipleLocations" onclick="LocationOptionChoice();" />Multiple Locations
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-xs-1"></div>
+            </div>
+            <br/>
+            <section id="Choice2Section" class="row" style="display: none;">
+                <div class="col-sm-2 col-xs-1"></div>
+                <div class="col-sm-8 col-xs-10">
+                    <div class="form-group">
+                        <div class="lead">
+                            Step 2...Enter Information Manually or Upload Excel Spreadsheet?
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="RadioManualEntry" value="ManualEntry" onclick="InformationEntryChoice('manual');"/>Manual Entry
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="RadioUpload" value="SpreadsheetUpload" onclick="InformationEntryChoice('upload');"/>Upload Excel Spreadsheet
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-xs-1"></div>
+            </section>
+            <br/>
+            <section id="InformationFieldsSection" class="row well well-sm" style="display: none;">
+                <div class="col-sm-2 col-xs-1"></div>
+                <div class="col-sm-8 col-xs-10">
+                    <div class="form-group">
+                        <div class="lead">
+                            Step 3...Submit information
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BusinessName)
+                        @Html.EditorFor(model => model.BusinessName, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Business Name"}})
+                        @Html.ValidationMessageFor(model => model.BusinessName, "", new {@class = "text-danger"})
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address.Line1, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address.Line1, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Address.Line1, "", new {@class = "text-danger"})
-            </div>
-        </div>
+                    <div class="form-group">
+                        @@Html.LabelFor(model => model.BusinessType)
+                        <select class="form-control">
+                            <option>Select</option>
+                            @foreach (var option in Enum.GetValues(typeof(BusinessModel.BusinessTypeEnum)))
+                            {
+                                <option>@option.ToString()</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WebsiteAddress)
+                        @Html.EditorFor(model => model.WebsiteAddress, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Website Address"}})
+                        @Html.ValidationMessageFor(model => model.WebsiteAddress, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ContactEmail)
+                        @Html.EditorFor(model => model.ContactEmail, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Contact Email Address" } })
+                        @Html.ValidationMessageFor(model => model.ContactEmail, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PhoneNumber)
+                        @Html.EditorFor(model => model.PhoneNumber, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Phone Number"}})
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new {@class = "text-danger"})
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address.Line2, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address.Line2, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Address.Line2, "", new {@class = "text-danger"})
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address.Line1)
+                        @Html.EditorFor(model => model.Address.Line1, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Address Line1"}})
+                        @Html.ValidationMessageFor(model => model.Address.Line1, "", new {@class = "text-danger"})
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address.City, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address.City, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Address.City, "", new {@class = "text-danger"})
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address.Line2)
+                        @Html.EditorFor(model => model.Address.Line2, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Address Line2"}})
+                        @Html.ValidationMessageFor(model => model.Address.Line2, "", new {@class = "text-danger"})
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address.State, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Address.State, "Select Your State", new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Address.State, "", new {@class = "text-danger"})
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address.City)
+                        @Html.EditorFor(model => model.Address.City, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "City"}})
+                        @Html.ValidationMessageFor(model => model.Address.City, "", new {@class = "text-danger"})
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address.Zipcode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address.Zipcode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address.Zipcode, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address.State)
+                        <br/>
+                        <select class="form-control">
+                            @foreach (var option in Enum.GetValues(typeof(Address.States)))
+                            {
+                                <option>@option.ToString()</option>
+                            }
+                        </select>
+                    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Register" class="btn btn-default" />
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address.Zipcode)
+                        @Html.EditorFor(model => model.Address.Zipcode, new {htmlAttributes = new {@class = "form-control", PlaceHolder = "City"}})
+                        @Html.ValidationMessageFor(model => model.Address.Zipcode, "", new {@class = "text-danger"})
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        @Html.ActionLink("Cancel", "Index", "Home", null, new {@class = "btn btn-danger"})
+                        <button type="submit" value="Register" class="btn btn-primary" style="margin-left: 1em;">Register</button>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-xs-1"></div>
+            </section>
+            <section id="UploadInformationSection" class="row well well-sm" style="display: none;">
+                <div class="col-sm-2 col-xs-1"></div>
+                <div class="col-sm-8 col-xs-10">
+                    <div class="form-group">
+                        <div class="lead">
+                            Step 3...Upload information
+                        </div>
+                    </div>
+                </div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td style="width: 50%;" class="lead text-center">Upload.</td>
+                                <td style="width: 50%;" class="text-danger">
+                                    Please upload in CSV or XLSX Format. Data must use following column names:
+                                    @Html.Action("PrintAllBusinessModelProps")
+                                    @*@for (int i = 0; i < ViewData.ModelMetadata.Properties.Count(); i++)
+                                    {
+                                        var prop = ViewData.ModelMetadata.Properties.ElementAt(i);
+                                        @prop.
+                                        if (i == ViewData.ModelMetadata.Properties.Count() - 1)
+                                        {
+                                            <label>@prop.PropertyName</label>
+                                        }
+                                        else
+                                        {
+                                            <label>@prop.PropertyName, </label>
+                                        }
+                                    }*@
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+</section>
         </div>
-    </div>
+    </form>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    
+
+    

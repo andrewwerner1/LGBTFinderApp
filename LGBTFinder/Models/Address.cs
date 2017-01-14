@@ -28,6 +28,9 @@ namespace LGBTFinder.Models
         [Display(Name = "Zipcode")]
         public int Zipcode { get; set; }
 
-
+        public Address()
+        {
+            
+        }
     }
 }

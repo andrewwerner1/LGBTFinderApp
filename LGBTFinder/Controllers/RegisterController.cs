@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using LGBTFinder.Models;
 
 namespace LGBTFinder.Controllers
 {
@@ -11,7 +14,45 @@ namespace LGBTFinder.Controllers
         // GET: Register
         public ActionResult Index()
         {
+            BusinessModel model = new BusinessModel();
             return View();
+        }
+
+        public string PrintAllBusinessModelProps()
+        {
+            BusinessModel model = new BusinessModel();
+            string output = string.Empty;
+            output = PrintAllBusinessModelPropsHelper(model.GetType(), ref output);
+            return output;
+        }
+
+        public string PrintAllBusinessModelPropsHelper(Type objType, ref string output, bool nested = false)
+        {
+
+            PropertyInfo[] props = objType.GetProperties();
+            for (int i = 0; i < props.Length; i++)
+            {
+                PropertyInfo prop = props[i];
+
+                if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int))
+                {
+                    
+                    if (i == props.Length - 1 && !nested)
+                    {
+                        output += prop.Name;
+                    }
+                    else
+                    {
+                        output += prop.Name + ", ";
+                    }
+                }
+                else
+                {
+                    var propertyType = prop.PropertyType;
+                    PrintAllBusinessModelPropsHelper(propertyType, ref output, true);
+                }
+            }
+            return output;
         }
     }
 }
