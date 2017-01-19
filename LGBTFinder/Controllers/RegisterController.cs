@@ -34,7 +34,7 @@ namespace LGBTFinder.Controllers
             {
                 PropertyInfo prop = props[i];
 
-                if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int))
+                if (IsSimpleType(prop.PropertyType))
                 {
                     
                     if (i == props.Length - 1 && !nested)
@@ -53,6 +53,23 @@ namespace LGBTFinder.Controllers
                 }
             }
             return output;
+        }
+
+        public bool IsSimpleType(Type type)
+        {
+            if (type == typeof(string))
+            {
+                return true;
+            }
+            if (type == typeof(int) || type == typeof(double) || type == typeof(float))
+            {
+                return true;
+            }
+            if (type == typeof(DateTime))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

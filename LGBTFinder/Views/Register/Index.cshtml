@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="form-group">
-                        @@Html.LabelFor(model => model.BusinessType)
+                        <strong>Business Type</strong>
                         <select class="form-control">
                             <option>Select</option>
                             @foreach (var option in Enum.GetValues(typeof(BusinessModel.BusinessTypeEnum)))
@@ -148,23 +148,13 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td style="width: 50%;" class="lead text-center">Upload.</td>
+                                <td style="width: 50%;" class="text-center">
+                                    <input type="file" id="InputBusinessData" style="margin: 0 auto;"/>
+                                    <p class="help-block">Please upload spreadsheet of business location data.</p>
+                                </td>
                                 <td style="width: 50%;" class="text-danger">
                                     Please upload in CSV or XLSX Format. Data must use following column names:
                                     @Html.Action("PrintAllBusinessModelProps")
-                                    @*@for (int i = 0; i < ViewData.ModelMetadata.Properties.Count(); i++)
-                                    {
-                                        var prop = ViewData.ModelMetadata.Properties.ElementAt(i);
-                                        @prop.
-                                        if (i == ViewData.ModelMetadata.Properties.Count() - 1)
-                                        {
-                                            <label>@prop.PropertyName</label>
-                                        }
-                                        else
-                                        {
-                                            <label>@prop.PropertyName, </label>
-                                        }
-                                    }*@
                                 </td>
                             </tr>
                         </tbody>

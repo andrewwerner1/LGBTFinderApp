@@ -10,6 +10,8 @@ namespace LGBTFinder.Models
     {
         public enum BusinessTypeEnum { Restaurant, Clothing, CoffeeShop, Hotel, HardwareStore, Other  };
 
+       // public List<string>  { get; set; }
+
         [Display(Name = "Business Name")]
         public string BusinessName { get; set; }
 

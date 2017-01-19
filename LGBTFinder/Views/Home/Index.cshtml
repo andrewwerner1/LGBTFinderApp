@@ -11,20 +11,34 @@
 
 <h2 class="text-center">LGBT Friendly Business Finder</h2>
 
-<div class="row">
-    <div class="col-sm-5">
-        <div class="lead text-center">
-            <a href="#" id="FinderSection" onclick="LoadFinderSection();">Search For a LGBT Friendly Business</a>
-        </div>
+<div class="form-inline text-center">
+    <div class="form-group">
+        <select class="form-control" id="SelectAction">
+            <option value="ChooseAction" id="RadioChooseAction">
+                Choose An Action
+            </option>
+            <option value="Search" id="SelectSearch">
+                Search For a LGBT Friendly Business
+            </option>
+            <option value="Register" id="SelectRegister">
+                Register a LGBT Friendly Business
+            </option>
+        </select>
     </div>
-    <div class="col-sm-2"></div>
-    <div class="col-sm-5">
-        <div class="lead text-center">
-            <a href="#" id="RegisterSection" onclick="LoadRegisterSection();">Register a LGBT Friendly Business</a>
-
-        </div>
+    <div class="form-group">
+        <button id="btnChooseAction" class="btn btn-primary" onclick="SelectAction();">Go!</button>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-xs-2 col-sm-5"></div>
+    <div class-="col-xs-8 col-sm-2">
+        <div class="form-group">
+        </div>
+    </div>
+    <div class="col-xs-2 col-sm-5"></div>
+</div>
+
 
 
 <div id="PartialViewData"></div>
@@ -33,6 +47,16 @@
 
 <script type="text/javascript">
     
+    function SelectAction() {
+        var chosenAction = $('#SelectAction').val();
+        if (chosenAction === 'Search') {
+            LoadFinderSection();
+        }
+        else if (chosenAction === 'Register') {
+            LoadRegisterSection();
+        }
+    };
+
     function LoadFinderSection() {
         $.ajax({
             type: "GET",
