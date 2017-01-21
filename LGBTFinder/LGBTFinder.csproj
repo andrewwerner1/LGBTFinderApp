@@ -189,8 +189,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\darkhairkiss.jpg" />
+    <Content Include="Images\dreamstime_m_31335812.jpg" />
+    <Content Include="Images\dreamstime_m_31335812_halfsize.jpg" />
+    <Content Include="Images\dreamstime_m_31335812_quartersize.jpg" />
     <Content Include="Images\Flag.ico" />
     <Content Include="Images\Flag.jpg" />
+    <Content Include="Images\holdinghands65percent.jpg" />
+    <Content Include="Images\rainbowbarcode.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

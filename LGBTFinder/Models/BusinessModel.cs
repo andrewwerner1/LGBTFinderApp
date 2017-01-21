@@ -8,12 +8,41 @@ namespace LGBTFinder.Models
 {
     public class BusinessModel
     {
-        public enum BusinessTypeEnum { Restaurant, Clothing, CoffeeShop, Hotel, HardwareStore, Other  };
+        public enum BusinessTypeEnum
+        {
+            Restaurant,
+            Clothing,
+            CoffeeShop,
+            Hotel,
+            Hostel,
+            RetailStore,
+            Bar,
+            Nightclub,
+            All,
+            Other
+        };
 
-       // public List<string>  { get; set; }
+        public enum BusinessDistanceEnum
+        {
+            One = 1,
+            Five = 5,
+            Ten = 10,
+            TwentyFive = 25,
+            Fifty = 50,
+            OneHundred = 100,
+            Any 
+
+        };
 
         [Display(Name = "Business Name")]
         public string BusinessName { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Business Description")]
+        public string BusinessDescription { get; set; }
+
+        [Display(Name = "Image")]
+        public Guid Image { get; set; }
 
         public Address Address { get; set; }
 

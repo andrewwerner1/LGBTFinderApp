@@ -4,32 +4,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    section#header {
+        background-image: url(../../Images/holdinghands65percent.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 22em;
+    }
 
+    #lblTitle {
+        padding-top: 2em;
+        font-size: 18pt;
+        color: black;
+    }
+</style>
 
+<section id="header">
 
+    <div class="text-center lead" id="lblTitle"></div>
 
-
-<h2 class="text-center">LGBT Friendly Business Finder</h2>
-
-<div class="form-inline text-center">
-    <div class="form-group">
-        <select class="form-control" id="SelectAction">
-            <option value="ChooseAction" id="RadioChooseAction">
-                Choose An Action
-            </option>
-            <option value="Search" id="SelectSearch">
-                Search For a LGBT Friendly Business
-            </option>
-            <option value="Register" id="SelectRegister">
-                Register a LGBT Friendly Business
-            </option>
-        </select>
+    <div class="form-inline text-center">
+        <div class="form-group">
+            <select class="form-control" id="SelectAction">
+                <option value="ChooseAction" id="RadioChooseAction">
+                    Choose An Action
+                </option>
+                <option value="Search" id="SelectSearch">
+                    Search For a LGBT Friendly Business
+                </option>
+                <option value="Register" id="SelectRegister">
+                    Register a LGBT Friendly Business
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button id="btnChooseAction" class="btn btn-primary" onclick="SelectAction();">Go!</button>
+        </div>
     </div>
-    <div class="form-group">
-        <button id="btnChooseAction" class="btn btn-primary" onclick="SelectAction();">Go!</button>
-    </div>
-</div>
-
+</section>
 <div class="row">
     <div class="col-xs-2 col-sm-5"></div>
     <div class-="col-xs-8 col-sm-2">

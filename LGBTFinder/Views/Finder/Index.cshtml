@@ -1,1 +1,45 @@
-﻿
+﻿@using System.Web.UI.WebControls
+@using LGBTFinder.Models
+@model LGBTFinder.Models.BusinessModel
+
+<form class="form-inline text-center well well-sm">
+    <div class="row">
+        <div class="form-group">
+            <div class="lead text-primary">Enter Search Criteria</div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="form-group">
+            <label for="InputZipcode">Zipcode</label>
+            <input type="text" class="form-control" placeholder="Zipcode" id="InputZipcode"/>
+        </div>
+        <div class="form-group">
+            <label>Distance (Miles)</label>
+            <select class="form-control" id="SelectDistance">
+                <option>Select Distance</option>
+                @foreach (var option in Enum.GetValues(typeof(BusinessModel.BusinessDistanceEnum)))
+                {
+                    <option>@option.ToString()</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Business Type</label>
+            <select class="form-control" id="SelectBusinessType">
+                <option>Select Business Type</option>
+                @foreach (var option in Enum.GetValues(typeof(BusinessModel.BusinessTypeEnum)))
+                {
+                    <option>@option.ToString()</option>
+                }
+            </select>
+        </div>
+
+    </div>
+    <div class="row text-center">
+        <div class="form-group">
+            <br/>
+            <button class="btn btn-primary" onclick="CallZipcodeAPIFunction();">Find Businesses!</button>
+        </div>
+    </div>
+</form>
